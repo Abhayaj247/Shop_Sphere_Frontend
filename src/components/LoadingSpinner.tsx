@@ -3,7 +3,7 @@ import { Sparkles } from "lucide-react";
 
 const LoadingSpinner: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900">
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <div className="relative">

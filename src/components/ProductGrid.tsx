@@ -14,7 +14,6 @@ interface Product {
 interface ProductGridProps {
   products: Product[];
   wishlist: number[];
-  searchQuery: string;
   onWishlistToggle: (productId: number) => void;
   onQuickView: (product: Product) => void;
   onAddToCart: (product: Product) => void;
@@ -24,7 +23,6 @@ interface ProductGridProps {
 const ProductGrid: React.FC<ProductGridProps> = ({
   products,
   wishlist,
-  searchQuery,
   onWishlistToggle,
   onQuickView,
   onAddToCart,

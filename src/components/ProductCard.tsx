@@ -28,7 +28,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <div className="group bg-white dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden border border-gray-100 dark:border-gray-700">
       {/* Product Image */}
-      <div className="relative h-64 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 overflow-hidden">
+      <div className="relative h-64 bg-linear-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 overflow-hidden">
         {product.images.length > 0 ? (
           <img
             src={product.images[0]}
@@ -75,7 +75,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         {/* Quick Add Button on Hover */}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/60 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
           <button
             onClick={() => onAddToCart(product)}
             disabled={product.stock === 0}
@@ -115,7 +115,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         {/* Price */}
         <div className="flex items-center justify-between mb-4">
           <div>
-            <p className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
+            <p className="text-2xl font-bold text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
               ₹{product.price.toLocaleString()}
             </p>
             {product.price > 1000 && (
@@ -132,7 +132,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           disabled={product.stock === 0}
           className={`w-full py-3 rounded-xl font-semibold transition-all transform hover:scale-105 ${
             product.stock > 0
-              ? "bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-500 dark:to-purple-500 text-white hover:from-indigo-700 hover:to-purple-700 dark:hover:from-indigo-600 dark:hover:to-purple-600 shadow-lg"
+              ? "bg-linear-to-r from-indigo-600 to-purple-600 dark:from-indigo-500 dark:to-purple-500 text-white hover:from-indigo-700 hover:to-purple-700 dark:hover:from-indigo-600 dark:hover:to-purple-600 shadow-lg"
               : "bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed"
           }`}
         >

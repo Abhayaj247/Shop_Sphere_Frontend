@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { Filter } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Filter, Home } from "lucide-react";
 
 // Components
 import Header from "../components/Header";
@@ -52,6 +52,30 @@ const CustomerDashboard: React.FC = () => {
     { name: "Mobile Accessories", icon: "🎧" },
   ];
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const hasAuthCookie = () => {
+    if (typeof document === "undefined") return false;
+    return document.cookie.split("; ").some((c) => c.trim().startsWith("authToken="));
+  };
+
+  // initial cookie check
+  useEffect(() => {
+    setIsAuthenticated(hasAuthCookie());
+  }, []);
+
+  // poll cookie while unauthenticated so UI updates when login happens in-place
+  useEffect(() => {
+    if (isAuthenticated) return;
+    const id = setInterval(() => {
+      if (hasAuthCookie()) {
+        setIsAuthenticated(true);
+        clearInterval(id);
+      }
+    }, 1000);
+    return () => clearInterval(id);
+  }, [isAuthenticated]);
+
   // Fetch products and user data
   useEffect(() => {
     const fetchDashboard = async () => {
@@ -61,13 +85,22 @@ const CustomerDashboard: React.FC = () => {
           { withCredentials: true }
         );
 
-        setUser(response.data.user);
-        // Store username in localStorage for cart operations
+        // backend may include user when session exists
+        setUser(response.data.user || null);
         if (response.data.user?.name) {
           localStorage.setItem("username", response.data.user.name);
         }
-        setProducts(response.data.products);
-        setFilteredProducts(response.data.products);
+
+        // if backend returned user, mark authenticated
+        if (response.data.user) {
+          setIsAuthenticated(true);
+        } else {
+          // fallback: check cookie presence
+          setIsAuthenticated(hasAuthCookie());
+        }
+
+        setProducts(response.data.products || []);
+        setFilteredProducts(response.data.products || []);
       } catch (error) {
         console.error("Error loading dashboard:", error);
       } finally {
@@ -206,6 +239,11 @@ const CustomerDashboard: React.FC = () => {
       console.log(response.data);
       console.log("User successfully logged out");
 
+      // clear local state
+      localStorage.removeItem("username");
+      setUser(null);
+      setIsAuthenticated(false);
+
       navigate("/login");
     } catch (error) {
       console.error("Error during logout:", error);
@@ -221,6 +259,88 @@ const CustomerDashboard: React.FC = () => {
 
   if (loading) {
     return <LoadingSpinner />;
+  }
+
+  // show login/signup prompt when not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center py-12">
+        {/* Home Button */}
+        <div className="absolute top-4 left-4 z-10">
+          <Link
+            to="/"
+            className="flex items-center space-x-2 px-4 py-2 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all group"
+          >
+            <Home className="w-5 h-5 text-gray-700 dark:text-gray-300 group-hover:text-indigo-600 dark:group-hover:text-indigo-400" />
+            <span className="font-semibold text-gray-700 dark:text-gray-300 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
+              Home
+            </span>
+          </Link>
+        </div>
+        <div className="w-full max-w-5xl mx-auto px-6">
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-lg p-8">
+            <div className="flex flex-col lg:flex-row items-center gap-8">
+              <div className="flex-1">
+                <p className="text-sm uppercase tracking-widest text-indigo-500 font-semibold mb-2">
+                  Dashboard
+                </p>
+                <h2 className="text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-white leading-tight mb-4">
+                  Welcome back to
+                  <span className="ml-2 bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                    ShopSphere
+                  </span>
+                </h2>
+                <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl">
+                  Sign in or create an account to view your orders, manage
+                  addresses, save favorites, and enjoy a personalized shopping
+                  experience.
+                </p>
+
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    to="/login"
+                    className="px-6 py-2 bg-linear-to-br from-indigo-600 to-purple-600 text-white rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+                  >
+                    Login
+                  </Link>
+
+                  <Link
+                    to="/register"
+                    className="px-6 py-2 bg-linear-to-br from-indigo-600 to-purple-600 text-white rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+                  >
+                    Sign up
+                  </Link>
+                </div>
+              </div>
+
+              <div className="w-full lg:w-80 shrink-0">
+                <div className="bg-linear-to-br from-indigo-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-xl p-6 h-full flex flex-col justify-center items-center border border-gray-100 dark:border-gray-800">
+                  {/* simple benefits list to resemble dashboard content */}
+                  <svg className="w-16 h-16 mb-4 text-indigo-500" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 7v4a4 4 0 004 4h10" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M21 7v10a2 2 0 01-2 2H7" />
+                  </svg>
+                  <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-2">
+                    <li className="flex items-center gap-3">
+                      <span className="inline-block w-2 h-2 rounded-full bg-indigo-500" />
+                      View orders & tracking
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <span className="inline-block w-2 h-2 rounded-full bg-indigo-500" />
+                      Manage addresses & payments
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <span className="inline-block w-2 h-2 rounded-full bg-indigo-500" />
+                      Save favorites & recommendations
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  
+    );
   }
 
   return (
@@ -293,7 +413,7 @@ const CustomerDashboard: React.FC = () => {
         <ProductGrid
           products={filteredProducts}
           wishlist={wishlist}
-          searchQuery={searchQuery}
+          // searchQuery={searchQuery}
           onWishlistToggle={toggleWishlist}
           onQuickView={setShowQuickView}
           onAddToCart={handleAddToCart}

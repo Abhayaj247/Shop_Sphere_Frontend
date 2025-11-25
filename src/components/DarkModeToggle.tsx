@@ -1,6 +1,6 @@
 import React from "react";
 import { Moon, Sun } from "lucide-react";
-import { useDarkMode } from "../contexts/DarkModeContext";
+import {useDarkMode} from "../contexts/useDarkMode"
 
 const DarkModeToggle: React.FC = () => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
@@ -8,7 +8,7 @@ const DarkModeToggle: React.FC = () => {
   return (
     <button
       onClick={toggleDarkMode}
-      className="p-2 lg:p-3 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all group"
+      className="p-2 lg:p-3 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all group cursor-pointer"
       title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
     >
       {isDarkMode ? (

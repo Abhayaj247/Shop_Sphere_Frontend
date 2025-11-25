@@ -38,7 +38,7 @@ function AdminLogin() {
       // Navigate based on role
       setTimeout(() => {
         if (role === "ADMIN") {
-          navigate("/admin/dashboard");
+          navigate("/admindashboard");
         } else {
           setError("Access denied. Admin only.");
         }

@@ -74,7 +74,7 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({
                 <span className="ml-2 text-gray-600 dark:text-gray-400">(4.5) • 120 reviews</span>
               </div>
               <div>
-                <p className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
+                <p className="text-4xl font-bold text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
                   ₹{product.price.toLocaleString()}
                 </p>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
@@ -90,7 +90,7 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({
                   disabled={product.stock === 0}
                   className={`flex-1 py-3 rounded-xl font-semibold transition-all ${
                     product.stock > 0
-                      ? "bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-500 dark:to-purple-500 text-white hover:from-indigo-700 hover:to-purple-700 dark:hover:from-indigo-600 dark:hover:to-purple-600"
+                      ? "bg-linear-to-r from-indigo-600 to-purple-600 dark:from-indigo-500 dark:to-purple-500 text-white hover:from-indigo-700 hover:to-purple-700 dark:hover:from-indigo-600 dark:hover:to-purple-600"
                       : "bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed"
                   }`}
                 >

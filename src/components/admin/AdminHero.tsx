@@ -16,7 +16,7 @@ const AdminHero = () => {
       console.log(response.data);
       console.log("User successfully logged out");
 
-      navigate("/admin/login");
+      navigate("/admin");
     } catch (error) {
       console.error("Error during logout:", error);
     }

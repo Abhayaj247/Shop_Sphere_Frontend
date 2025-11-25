@@ -103,7 +103,7 @@ const HomePage: React.FC = () => {
                 Sign Up
               </Link>
               <Link
-                to="/admin/login"
+                to="/admin"
                 className="px-6 py-2 bg-linear-to-br from-indigo-600 to-purple-600 text-white rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
               >
                 Admin
@@ -147,7 +147,7 @@ const HomePage: React.FC = () => {
                   to="/login"
                   className="px-8 py-4 bg-white dark:bg-gray-800 text-indigo-600 dark:text-indigo-400 rounded-xl font-bold text-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-all shadow-lg border-2 border-indigo-200 dark:border-indigo-800"
                 >
-                  Sign In
+                  Login
                 </Link>
               </div>
             </div>
@@ -269,7 +269,7 @@ const HomePage: React.FC = () => {
                   to="/login"
                   className="px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-xl font-bold text-lg hover:bg-white/30 transition-all border-2 border-white/30"
                 >
-                  Sign In
+                  Login
                 </Link>
               </div>
             </div>

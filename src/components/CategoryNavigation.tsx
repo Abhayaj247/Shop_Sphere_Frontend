@@ -34,7 +34,7 @@ const CategoryNavigation: React.FC<CategoryNavigationProps> = ({
               onClick={() => onCategorySelect(null)}
               className={`px-4 lg:px-6 py-2 rounded-xl font-semibold transition-all whitespace-nowrap flex items-center space-x-2 ${
                 selectedCategory === null
-                  ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
+                  ? "bg-linear-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
                   : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
               }`}
             >
@@ -47,7 +47,7 @@ const CategoryNavigation: React.FC<CategoryNavigationProps> = ({
                 onClick={() => onCategorySelect(category.name)}
                 className={`px-4 lg:px-6 py-2 rounded-xl font-semibold transition-all whitespace-nowrap flex items-center space-x-2 ${
                   selectedCategory === category.name
-                    ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
+                    ? "bg-linear-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
                     : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
                 }`}
               >
@@ -59,9 +59,14 @@ const CategoryNavigation: React.FC<CategoryNavigationProps> = ({
           <div className="hidden lg:flex items-center space-x-4">
             <button
               onClick={onFiltersToggle}
-              className="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl transition-all text-gray-700 dark:text-gray-300"
+              aria-pressed={showFilters}
+              className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-all text-gray-700 dark:text-gray-300 ${
+                showFilters
+                  ? "bg-linear-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
+                  : "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700"
+              }`}
             >
-              <SlidersHorizontal className="w-5 h-5" />
+              {showFilters ? <X className="w-5 h-5" /> : <SlidersHorizontal className="w-5 h-5" />}
               <span className="font-semibold">Filters</span>
             </button>
             <select

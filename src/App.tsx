@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { DarkModeProvider } from "./contexts/DarkModeContext";
+import { DarkModeProvider } from "./contexts/DarkModeProvider";
 import HomePage from "./pages/HomePage";
 import RegistrationPage from "./pages/RegistrationPage";
 import Login from "./pages/Login";
@@ -16,10 +16,10 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminLogin />} />
           <Route path="/customer/dashboard" element={<CustomerDashboard />} />
           <Route path="/orders" element={<OrderHistory />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admindashboard" element={<AdminDashboard />} />
         </Routes>
       </BrowserRouter>
     </DarkModeProvider>

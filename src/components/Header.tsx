@@ -77,7 +77,7 @@ const Header: React.FC<HeaderProps> = ({
             {/* Cart */}
             <button
               onClick={onCartClick}
-              className="relative p-2 lg:p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-all group"
+              className="relative p-2 lg:p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-all group cursor-pointer"
             >
               <ShoppingCart className="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors" />
               {cartItemCount > 0 && (
@@ -104,7 +104,7 @@ const Header: React.FC<HeaderProps> = ({
             {/* Logout */}
             <button
               onClick={onLogout}
-              className="p-2 lg:p-3 bg-red-50 dark:bg-red-900/30 hover:bg-red-100 dark:hover:bg-red-900/50 rounded-xl transition-all group"
+              className="p-2 lg:p-3 bg-red-50 dark:bg-red-900/30 hover:bg-red-100 dark:hover:bg-red-900/50 rounded-xl transition-all group cursor-pointer"
               title="Logout"
             >
               <LogOut className="w-5 h-5 lg:w-6 lg:h-6 text-red-600 dark:text-red-400 group-hover:text-red-700 dark:group-hover:text-red-300" />
