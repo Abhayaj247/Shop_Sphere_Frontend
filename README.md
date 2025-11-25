@@ -1,69 +1,90 @@
-# React + TypeScript + Vite
+# 🛍️ ShopSphere Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the frontend application for **ShopSphere**, a full-featured e-commerce platform. It provides an intuitive, responsive, and role-based user interface for both customers and administrators.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+The ShopSphere frontend is structured to provide distinct experiences for different user roles:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Customer Features
+* **Authentication & Authorization:** Secure Login and Registration for `CUSTOMER` users.
+* **Product Discovery:** View a catalog of products.
+* **Advanced Filtering:** Search, filter by category (e.g., Shirts, Mobiles), sort (price/name), and filter by price range.
+* **Shopping Cart:** Dedicated cart sidebar to view, update quantity, and delete cart items.
+* **Secure Checkout:** Integrated Razorpay for secure payment processing.
+* **Order History:** View past orders including product details, quantity, and total price.
+* **UI/UX:** Dark Mode functionality and a visually appealing, responsive layout.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Admin Features
+* **Admin Login:** Separate protected login route for `ADMIN` users.
+* **Product Management:** Add new products and delete existing products from the catalog.
+* **User Management:** Modify user details (username, email, role) and view user profiles by ID.
+* **Business Intelligence:** Fetch detailed business reports:
+    * Monthly Business (by month/year).
+    * Daily Business (by date).
+    * Yearly Business (by year).
+    * Overall Business (total revenue).
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 💻 Tech Stack
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The ShopSphere Frontend is built with the following technologies:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+* **Framework:** React 19.
+* **Language:** TypeScript.
+* **Tooling:** Vite.
+* **Styling:** Tailwind CSS (configured with a custom dark mode variant).
+* **Routing:** React Router DOM (v7).
+* **HTTP Client:** Axios.
+* **Icons:** Lucide React.
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## ⚙️ Prerequisites
+
+Before running the application, ensure you have the following installed:
+
+* Node.js (LTS recommended)
+* The **ShopSphere Backend** API running at `http://localhost:8080`.
+
+---
+
+## 🛠️ Installation and Setup
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/Abhayaj247/Shop_Sphere_Frontend.git]
+    cd shop-sphere-frontend
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
+
+3.  **Configure Environment Variables:**
+
+    Create a file named **`.env.local`** in the root directory (or simply **`.env`** if you don't mind committing it, noting it is ignored by `.gitignore`).
+
+    Copy the content from `.env.example` and replace the placeholder with your **Razorpay Key ID**.
+
+    **`.env.local`**
+    ```
+    VITE_RAZORPAY_KEY_ID=your_razorpay_key_id_here
+    ```
+
+---
+
+## 🚀 Running the Project
+
+Use the development script defined in `package.json`:
+
+```bash
+npm run dev
+# or
+yarn dev

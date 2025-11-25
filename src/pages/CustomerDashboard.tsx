@@ -244,7 +244,7 @@ const CustomerDashboard: React.FC = () => {
       setUser(null);
       setIsAuthenticated(false);
 
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       console.error("Error during logout:", error);
     }
