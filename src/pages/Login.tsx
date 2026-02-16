@@ -42,7 +42,7 @@ function Login() {
         if (role === "CUSTOMER") {
           navigate("/customer/dashboard");
         } else if (role === "ADMIN") {
-          navigate("/admin/dashboard");
+          navigate("/admindashboard");
         } else {
           setError("Invalid user role");
         }
